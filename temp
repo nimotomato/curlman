@@ -1,0 +1,9 @@
+I did not change all places where my comment could apply so if you like the change, apply it to all other places as well.
+
+Why lowercase on all files. Is it some windows path thing or?
+
+Terms/ackronyms/concepts to learn what they mean in c++:
+STL
+difference between constructor, copy constructor and assignment operator
+operators
+default arguments

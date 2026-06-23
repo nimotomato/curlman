@@ -1,10 +1,9 @@
-#ifndef APPSETTINGS_H
-#define APPSETTINGS_H
+#pragma once // ifdef is c-style header guard. This is the c++ way
 
 class AppSettings
 {
 public:
-    AppSettings();
+    AppSettings() = default; // no need to define in source file when you do not want to set any non default member variables
 
 
     const int getDefaultHeadersSize() const;

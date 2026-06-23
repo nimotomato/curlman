@@ -9,12 +9,6 @@ HeaderVector::HeaderVector(size_t initial_size)
     , slistHeaders(nullptr)
 {}
 
-HeaderVector::~HeaderVector() {
-    if (slistHeaders != nullptr) {
-        curl_slist_free_all(slistHeaders);
-    }
-}
-
 const std::vector<Header>& HeaderVector::getHeaders() const
 {
     return headers;
@@ -39,6 +33,7 @@ const curl_slist* HeaderVector::getHeadersSList()
     }
 
 
+    // Can you assume that this HeaderVector object will outlive the use of slistHeaders? Who owns this memory I find not obvious. Risk for use after free or double free
     return slistHeaders;
 }
 
@@ -72,4 +67,3 @@ void HeaderVector::setHeaderValue(size_t index, const std::string &newValue){
         h.setValue(newValue);
     }
 }
-

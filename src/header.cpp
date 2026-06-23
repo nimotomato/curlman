@@ -4,10 +4,9 @@ Header::Header() : key(""), value("")
 {
 }
 
-Header::Header(const std::string &newKey, const std::string &newValue) {
-    key = newKey;
-    value = newValue;
-}
+Header::Header(const std::string &newKey, const std::string &newValue)
+  : key(newKey), value(newValue) // use constructors instead of assignment operator
+{}
 
 std::string Header::getKey() const
 {
