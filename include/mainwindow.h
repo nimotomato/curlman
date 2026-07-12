@@ -1,4 +1,4 @@
-#ifndef MAINWINDOW_H
+#pragma once
 #define MAINWINDOW_H
 
 #include <curl/curl.h>
@@ -58,4 +58,3 @@ private:
     Request request;
 };
 
-#endif // MAINWINDOW_H

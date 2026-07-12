@@ -1,4 +1,5 @@
-#ifndef HEADER_H
+#pragma once
+
 #define HEADER_H
 #include <string>
 
@@ -21,4 +22,3 @@ private:
     std::string value;
 };
 
-#endif // HEADER_H

@@ -1,8 +1,6 @@
 #include "appsettings.h"
 
-AppSettings::AppSettings() {
-    int defaultHeadersSize = 20;
-    bool isWebsocket = false;
+AppSettings::AppSettings() : defaultHeadersSize(20), isWebsocket(false){
 }
 
 

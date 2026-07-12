@@ -1,4 +1,4 @@
-#ifndef RESPONSE_H
+#pragma once
 #define RESPONSE_H
 
 #include <string>
@@ -23,4 +23,3 @@ private:
     long statusCode;
 };
 
-#endif // RESPONSE_H

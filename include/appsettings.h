@@ -1,10 +1,9 @@
-#ifndef APPSETTINGS_H
-#define APPSETTINGS_H
+#pragma once
 
 class AppSettings
 {
 public:
-    AppSettings();
+    AppSettings() = default;
 
 
     const int getDefaultHeadersSize() const;

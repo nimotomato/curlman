@@ -1,4 +1,4 @@
-#ifndef REQUEST_H
+#pragma once
 #define REQUEST_H
 
 #include <string>
@@ -57,4 +57,3 @@ private:
 };
 
 
-#endif // REQUEST_H

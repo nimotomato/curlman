@@ -1,5 +1,4 @@
-#ifndef HEADERVECTOR_H
-#define HEADERVECTOR_H
+#pragma once
 
 #include "header.h"
 #include <vector>
@@ -9,7 +8,6 @@ class HeaderVector
 {
 public:
     HeaderVector(size_t initial_size);
-    ~HeaderVector();
 
     const std::vector<Header>& getHeaders() const;
     const curl_slist* getHeadersSList();
@@ -19,8 +17,4 @@ public:
 
 private:
     std::vector<Header> headers;
-    curl_slist* slistHeaders;
 };
-
-
-#endif //

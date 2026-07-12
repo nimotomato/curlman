@@ -6,14 +6,7 @@
 
 HeaderVector::HeaderVector(size_t initial_size)
     : headers(initial_size)
-    , slistHeaders(nullptr)
 {}
-
-HeaderVector::~HeaderVector() {
-    if (slistHeaders != nullptr) {
-        curl_slist_free_all(slistHeaders);
-    }
-}
 
 const std::vector<Header>& HeaderVector::getHeaders() const
 {
@@ -22,10 +15,7 @@ const std::vector<Header>& HeaderVector::getHeaders() const
 
 const curl_slist* HeaderVector::getHeadersSList()
 {
-    if (slistHeaders != nullptr) {
-        curl_slist_free_all(slistHeaders);
-        slistHeaders = nullptr;
-    }
+    curl_slist* slist = NULL;
 
     for (const auto& header : getHeaders())
     {
@@ -35,11 +25,11 @@ const curl_slist* HeaderVector::getHeadersSList()
         }
         std::string formattedHeader = header.getKey() + ": " + header.getValue();
 
-        slistHeaders = curl_slist_append(slistHeaders, formattedHeader.c_str());
+        slist = curl_slist_append(slist, formattedHeader.c_str());
     }
 
 
-    return slistHeaders;
+    return slist;
 }
 
 void HeaderVector::insertHeader(size_t index, const Header& newHeader)
