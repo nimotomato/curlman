@@ -114,7 +114,16 @@ Response Request::send()
     curl_easy_setopt(httpHandle, CURLOPT_URL, url.c_str());
 
     // handle headers
-    const curl_slist* h = headers.getHeadersSList();
+    curl_slist* h = NULL;
+    for (const auto& header : headers.getHeaders()){
+        if (header.getKey() == "")
+        {
+            continue;
+        }
+
+        std::string formattedHeader = header.getKey() + ": " + header.getValue();
+        h = curl_slist_append(h, formattedHeader.c_str());
+    }
     curl_easy_setopt(httpHandle, CURLOPT_HTTPHEADER, h);
 
     // handle method
@@ -168,6 +177,7 @@ Response Request::send()
     CURLcode result = curl_easy_perform(httpHandle);
     if (result != CURLE_OK)
         {
+            curl_slist_free_all(h);
             qDebug() << "curl_easy_perform() failed: " << curl_easy_strerror(result);
             throw std::runtime_error(curl_easy_strerror(result));
         }
@@ -185,6 +195,7 @@ Response Request::send()
     r.setBody(responseBody.str());
     r.setResponseHeadersString(responseHeaders.str());
     r.setStatusCode(statusCode);
+    curl_slist_free_all(h);
 
     return r;
 }

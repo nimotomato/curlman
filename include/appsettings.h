@@ -14,4 +14,3 @@ private:
     bool isWebsocket = false;
 };
 
-#endif // APPSETTINGS_H

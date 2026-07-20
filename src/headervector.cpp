@@ -13,25 +13,6 @@ const std::vector<Header>& HeaderVector::getHeaders() const
     return headers;
 }
 
-const curl_slist* HeaderVector::getHeadersSList()
-{
-    curl_slist* slist = NULL;
-
-    for (const auto& header : getHeaders())
-    {
-        if (header.getKey() == "")
-        {
-            continue;
-        }
-        std::string formattedHeader = header.getKey() + ": " + header.getValue();
-
-        slist = curl_slist_append(slist, formattedHeader.c_str());
-    }
-
-
-    return slist;
-}
-
 void HeaderVector::insertHeader(size_t index, const Header& newHeader)
 {
     if (index >= headers.size()){
