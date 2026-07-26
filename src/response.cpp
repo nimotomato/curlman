@@ -2,8 +2,6 @@
 
 #include <string>
 
-Response::Response() {}
-
 const std::string Response::getBody() const
 {
     return body;

@@ -6,7 +6,7 @@
 class Response
 {
 public:
-    Response();
+    Response() = default;
 
     const std::string getBody() const;
     void setBody(std::string newBody);
