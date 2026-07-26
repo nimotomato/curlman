@@ -6,6 +6,17 @@ find_package(CURL REQUIRED)
 
 qt_standard_project_setup()
 
+add_custom_target(DatabaseFiles SOURCES
+    migrations/20260726T095000_request.sql
+    migrations/20260726T095100_response.sql
+    migrations/20260726T095700_request_header.sql
+)
+
+file(COPY
+    ${CMAKE_SOURCE_DIR}/migrations
+    DESTINATION ${CMAKE_BINARY_DIR}
+)
+
 set(CMAKE_AUTOUIC_SEARCH_PATHS ${CMAKE_CURRENT_SOURCE_DIR}/ui)
 qt_add_executable(curlman
     WIN32 MACOSX_BUNDLE
