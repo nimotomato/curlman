@@ -7,6 +7,7 @@
 #include "appsettings.h"
 #include "headervector.h"
 #include "response.h"
+#include "persistence.h"
 
 struct AdvancedSettings {
     int timeoutSeconds;
@@ -15,7 +16,7 @@ struct AdvancedSettings {
 class Request
 {
 public:
-    Request(const AppSettings& settings);
+    Request(const AppSettings& settings, const Persistence& p);
     ~Request();
 
     enum class Method {
@@ -47,6 +48,7 @@ public:
     Response send();
 
 private:
+    Persistence persistence;
     std::string url;
     std::string body;
     Method method;

@@ -6,11 +6,11 @@
 #include <curl/curl.h>
 #include <QErrorMessage>
 
-MainWindow::MainWindow(AppSettings& settings, QWidget *parent)
+MainWindow::MainWindow(AppSettings& settings, Persistence& p, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , settings(settings)
-    , request(settings){
+    , request(settings, p){
     ui->setupUi(this);
     setWindowTitle("curlman");
 }

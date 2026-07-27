@@ -1,17 +1,16 @@
 #include "mainwindow.h"
 #include "appsettings.h"
+#include "persistence.h"
 
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
+#include <QDir>
 #include <curl/curl.h>
+#include <sqlite3.h>
 
 int main(int argc, char *argv[])
 {
-    curl_global_init(CURL_GLOBAL_DEFAULT);
-
-    AppSettings settings;
-
     QApplication a(argc, argv);
 
     a.setStyleSheet(
@@ -37,11 +36,46 @@ int main(int argc, char *argv[])
         }
     }
 
-    MainWindow w(settings);
+    sqlite3 *db = nullptr;
+
+    QDir dir(QCoreApplication::applicationDirPath() + "/storage");
+    if (!dir.exists())
+    {
+        dir.mkpath(".");
+    }
+    QString dbPath = QCoreApplication::applicationDirPath()
+                     + "/storage/app.db";
+
+    int rc = sqlite3_open(
+        dbPath.toUtf8().constData(),
+        &db
+        );
+    QFileInfo info(dbPath);
+    if (rc)
+    {
+        fprintf(stderr, "Failed to open database :%s\n", sqlite3_errmsg(db));
+        return 1;
+    }
+
+    sqlite3_exec(db,
+                 "PRAGMA foreign_keys = ON;",
+                 nullptr,
+                 nullptr,
+                 nullptr);
+
+    Persistence p(db);
+    p.runMigrations();
+
+    AppSettings settings;
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+
+    MainWindow w(settings, p);
     w.show();
 
     int result = QApplication::exec();
 
+    sqlite3_close(db);
     curl_global_cleanup();
 
     return result;

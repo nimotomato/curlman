@@ -4,6 +4,7 @@
 #include <curl/curl.h>
 #include "appsettings.h"
 #include "request.h"
+#include "persistence.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
@@ -17,7 +18,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(AppSettings& settings, QWidget *parent = nullptr);
+    explicit MainWindow(AppSettings& settings, Persistence& p, QWidget *parent = nullptr);
     ~MainWindow() override;
 
 private slots:

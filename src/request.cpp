@@ -8,9 +8,10 @@
 #include <QDebug>
 
 
-Request::Request(const AppSettings& settings)
+Request::Request(const AppSettings& settings, const Persistence& p)
     : settings(settings)
     , headers(settings.getDefaultHeadersSize())
+    , persistence(p)
 {
     httpHandle = curl_easy_init();
     if (!httpHandle)

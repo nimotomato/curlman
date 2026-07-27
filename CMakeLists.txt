@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.19)
-project(curlman LANGUAGES CXX)
+project(curlman LANGUAGES C CXX)
 
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets LinguistTools)
 find_package(CURL REQUIRED)
@@ -36,6 +36,10 @@ qt_add_executable(curlman
     include/response.h
 
     ui/mainwindow.ui
+    dependencies/sqlite3.c
+    dependencies/sqlite3.h
+    include/persistence.h
+src/persistence.cpp
 )
 
 target_include_directories(curlman PRIVATE include)
